@@ -13,14 +13,14 @@ import Home from "./components/Home";
 import EventBus from "./common/EventBus";
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(undefined);
+  //const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
+    //const user = AuthService.getCurrentUser();
 
-    if (user) {
-      setCurrentUser(user);
-    }
+    // if (user) {
+    //   setCurrentUser(user);
+    // }
 
     EventBus.on("logout", () => {
       logOut();
@@ -33,7 +33,7 @@ const App = () => {
 
   const logOut = () => {
     AuthService.logout();
-    setCurrentUser(undefined);
+    //setCurrentUser(undefined);
   };
 
   return (
