@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import {getCurrentUser} from "../services/auth.service";
+import AuthService from "../services/auth.service";
 
 const Home = () => {
   const [content, setContent] = useState("");
 
   useEffect(() => {
-    setContent(getCurrentUser());
+    setContent(AuthService.getCurrentUser());
   }, []);
 
   return (
