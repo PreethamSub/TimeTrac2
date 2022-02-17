@@ -6,4 +6,6 @@ const getUserActivity = () => {
   return axios.get(API_URL + "activity");
 };
 
-export default getUserActivity;
+export default {
+  getUserActivity
+};
