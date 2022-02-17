@@ -1,24 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import {getUserActivity} from "../services/user.service";
+import {getCurrentUser} from "../services/auth.service";
 
 const Home = () => {
   const [content, setContent] = useState("");
 
   useEffect(() => {
-    getUserActivity().then(
-      (response) => {
-        setContent(response.data);
-      },
-      (error) => {
-        const _content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-
-        setContent(_content);
-      }
-    );
+    setContent(getCurrentUser());
   }, []);
 
   return (
