@@ -6,7 +6,7 @@ const Home = () => {
   const [content, setContent] = useState("");
 
   useEffect(() => {
-    const user = AuthService.getCurrentUser().username
+    const user = AuthService.getCurrentUser().user.username
     if (user){
       setContent({user});
     }
@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>{content}</h3>
+        <h3>{content} Logged in successfully</h3>
       </header>
     </div>
   );
