@@ -9,7 +9,9 @@ const Home = () => {
     if (AuthService.getCurrentUser()){
       setContent(AuthService.getCurrentUser());
     }
-    setContent("Not Logged in");
+    else{
+      setContent("Not Logged in");
+    }
   }, []);
 
   return (
