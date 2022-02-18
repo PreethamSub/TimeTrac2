@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     const user = AuthService.getCurrentUser().username
     if (user){
-      setContent({user.concat(" successfully logged in")});
+      setContent({user});
     }
     else {
       setContent("Not Logged in");
