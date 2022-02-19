@@ -7,7 +7,7 @@ const Home = () => {
 
   useEffect(() => {
     if (AuthService.getCurrentUser()){
-      setContent(AuthService.getCurrentUser().username);
+      setContent(AuthService.getCurrentUser());
     }
     else {
       setContent("Not Logged in");
@@ -18,7 +18,9 @@ const Home = () => {
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>{content} Logged in successfully</h3>
+        <h3>{content.array.forEach(element => {
+          return <div>element</div> 
+        })} Logged in successfully</h3>
       </header>
     </div>
   );
