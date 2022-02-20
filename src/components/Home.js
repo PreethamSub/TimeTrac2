@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     if (AuthService.getCurrentUser()){
       var result = [];
-      data = AuthService.getCurrentUser()
+      var data = AuthService.getCurrentUser();
       for(var i in data)
         {result.push([i, data [i]]);}
       setContent(result);
