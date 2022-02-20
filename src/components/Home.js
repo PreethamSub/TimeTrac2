@@ -7,7 +7,7 @@ const Home = () => {
 
   useEffect(() => {
     if (AuthService.getCurrentUser()){
-      setContent(AuthService.getCurrentUser().username);
+      setContent(AuthService.getCurrentUser().user.username);
       console.log(AuthService.getCurrentUser())
     }
     else {
