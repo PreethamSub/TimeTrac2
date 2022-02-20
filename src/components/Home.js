@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>{content.map(a => <div>{a}</div>)}Logged in successfully</h3>
+        <h3>{content.map((a) => <div>{a}</div>)}Logged in successfully</h3>
       </header>
     </div>
   );
