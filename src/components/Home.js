@@ -7,7 +7,11 @@ const Home = () => {
 
   useEffect(() => {
     if (AuthService.getCurrentUser()){
-      setContent(AuthService.getCurrentUser());
+      var result = [];
+      data = AuthService.getCurrentUser()
+      for(var i in data)
+        {result.push([i, data [i]]);}
+      setContent(result);
     }
     else {
       setContent("Not Logged in");
