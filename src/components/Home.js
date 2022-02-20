@@ -7,11 +7,7 @@ const Home = () => {
 
   useEffect(() => {
     if (AuthService.getCurrentUser()){
-      var result = [];
-      var data = AuthService.getCurrentUser();
-      for(var i in data)
-        {result.push([i, data[i]]);}
-      setContent(result);
+      setContent(AuthService.getCurrentUser().username);
     }
     else {
       setContent("Not Logged in");
@@ -22,7 +18,7 @@ const Home = () => {
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>{content.map((a) => <div>{a}</div>)}Logged in successfully</h3>
+        <h3>{content}Logged in successfully</h3>
       </header>
     </div>
   );
