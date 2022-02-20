@@ -10,7 +10,7 @@ const Home = () => {
       var result = [];
       var data = AuthService.getCurrentUser();
       for(var i in data)
-        {result.push([i, data [i]]);}
+        {result.push([i,data [i]]);}
       setContent(result);
     }
     else {
