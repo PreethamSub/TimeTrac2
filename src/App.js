@@ -1,51 +1,83 @@
-import React, { useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import * as React from "react";
+import { Link, Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom'
+import useAuth from "./hooks/useAuth";
 
-import AuthService from "./services/auth.service";
+const Landing = () => <h1>Landing (Public)</h1>;
 
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Home from "./components/Home";
+const Dashboard = () => <h1>Dashboard (Private)</h1>;
 
-// import AuthVerify from "./common/AuthVerify";
-import EventBus from "./common/EventBus";
+function RequireAuth({ children }) {
+  const { authed } = useAuth();
+  const location = useLocation();
 
-const App = () => {
-  //const [currentUser, setCurrentUser] = useState(undefined);
+  return authed === true ? (
+    children
+  ) : (
+    <Navigate to="/login" replace state={{ path: location.pathname }} />
+  );
+}
 
-  useEffect(() => {
-    //const user = AuthService.getCurrentUser();
 
-    // if (user) {
-    //   setCurrentUser(user);
-    // }
+const Login = () => {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const { state } = useLocation();
 
-    EventBus.on("logout", () => {
-      logOut();
+  const handleLogin = () => {
+    login().then(() => {
+      navigate(state?.path || "/dashboard");
     });
-
-    return () => {
-      EventBus.remove("logout");
-    };
-  }, []);
-
-  const logOut = () => {
-    AuthService.logout();
-    //setCurrentUser(undefined);
   };
 
   return (
-      <div className="container mt-3">
-        <Switch>
-          <Route exact path={["/", "/home"]} component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-        </Switch>
-        {/* <AuthVerify logOut={logOut}/> */}
-      </div>
+    <div>
+      <h1>Login</h1>
+      <button onClick={handleLogin}>Log in</button>
+    </div>
   );
 };
 
-export default App;
+function Nav() {
+  const { authed, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
+  return (
+    <nav>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+      </ul>
+      {authed && <button onClick={handleLogout}>Logout</button>}
+    </nav>
+  );
+}
+
+export default function App() {
+  return (
+    <div>
+      <Nav />
+
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </div>
+  );
+}
