@@ -2,7 +2,7 @@ import * as React from "react";
 
 const authContext = React.createContext();
 
-function useAuth() {
+export function useAuth() {
   const [authed, setAuthed] = React.useState(false);
 
   return {
