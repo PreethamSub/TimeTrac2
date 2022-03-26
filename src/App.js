@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link, Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom'
-import useAuth from "./hooks/useAuth";
+import {useAuth} from "./hooks/useAuth";
 
 const Landing = () => <h1>Landing (Public)</h1>;
 
@@ -10,8 +10,7 @@ const Dashboard = () => <h1>Dashboard (Private)</h1>;
 
 function RequireAuth({ children }) {
   const navigate = useNavigate();
-  //const { authed } = useAuth();
-  const authed = true
+  const { authed } = useAuth();
   const location = useLocation();
 
   return authed === true ? (
