@@ -14,9 +14,7 @@ function RequireAuth({ children }) {
   const location = useLocation();
 
   if (authed === true){
-    return authed === true ? (
-      {children}
-    )
+    return {children}
   }
   if (authed === false){
     navigate("/login")
