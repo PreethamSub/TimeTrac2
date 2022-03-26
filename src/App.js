@@ -12,13 +12,15 @@ function RequireAuth({ children }) {
   const navigate = useNavigate();
   const { authed } = useAuth();
   const location = useLocation();
-  console.log(authed)
 
-  return authed === true ? (
-    children
-  ) : (
+  if (authed === true){
+    return authed === true ? (
+      {children}
+    )
+  }
+  if (authed === false){
     navigate("/login")
-  );
+  }
 }
 
 
