@@ -8,7 +8,7 @@ const Landing = () => <h1>Landing (Public)</h1>;
 
 const Dashboard = () => <h1>Dashboard (Private)</h1>;
 
-function RequireAuth({ children }) {
+const RequireAuth = ({ children }) => {
   const navigate = useNavigate();
   const { authed } = useAuth();
   const location = useLocation();
